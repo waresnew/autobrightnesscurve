@@ -1,6 +1,9 @@
-TARGET := iphone:clang:latest:7.0
+TARGET := iphone:clang:latest:16.0
 INSTALL_TARGET_PROCESSES = SpringBoard
-ARCHS = arm64 arm64e
+export THEOS_PACKAGE_SCHEME=rootless
+export ARCHS = arm64e
+export SYSROOT=$(THEOS)/sdks/iPhoneOS16.5.sdk
+export SDKVERSION=16.5
 
 include $(THEOS)/makefiles/common.mk
 

@@ -1,3 +1,5 @@
+#import <Foundation/NSObjCRuntime.h>
+
 %hook SBBrightnessControl
 
 -(void)setBrightnessLevel:(float)arg1 forRoute:(long long)arg2  {
