@@ -1,15 +1,14 @@
-TARGET := iphone:clang:latest:16.0
+TARGET := iphone:clang:latest:15.0
 INSTALL_TARGET_PROCESSES = SpringBoard
-export THEOS_PACKAGE_SCHEME=rootless
-export ARCHS = arm64e
-export SYSROOT=$(THEOS)/sdks/iPhoneOS16.5.sdk
-export SDKVERSION=16.5
+ARCHS = arm64e
 
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = BrightnessCurve
+BrightnessCurve_FRAMEWORKS = UIKit
+BrightnessCurve_EXTRA_FRAMEWORKS += Cephei
 
-BrightnessCurve_FILES = Tweak.x
+BrightnessCurve_FILES = $(wildcard *.x *.xm)
 BrightnessCurve_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
