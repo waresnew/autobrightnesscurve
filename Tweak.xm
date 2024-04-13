@@ -1,6 +1,7 @@
 #import <Foundation/NSObjCRuntime.h>
 #import <BrightnessManager.h>
 #import <UIKit/UIKit.h>
+#import <HIDEvent.h>
 
 static void didFinishLaunching(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef info) {
     NSLog(@"[BrightnessCurve] didFinishLaunching");
