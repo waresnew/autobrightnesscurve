@@ -28,7 +28,7 @@
 
 -(void)initWithIosVersion:(int)iosVersion {
   _iosVersion = iosVersion;
-  NSLog(@"[BrightnessManager] iOS Version: %f", _iosVersion);
+  NSLog(@"[BrightnessCurve] iOS Version: %f", _iosVersion);
   if (iosVersion >= 14) _brightnessController = [%c(SBDisplayBrightnessController) new];
 }
 

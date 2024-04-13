@@ -3,10 +3,10 @@
 #import <UIKit/UIKit.h>
 
 static void didFinishLaunching(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef info) {
-    NSLog(@"didFinishLaunching");
+    NSLog(@"[BrightnessCurve] didFinishLaunching");
     int iosVersion = [[[%c(UIDevice) currentDevice] systemVersion] intValue];
     [[BrightnessManager shared] initWithIosVersion: iosVersion];
-    NSLog(@"BrightnessManager initialized");
+    NSLog(@"[BrightnessCurve] BrightnessManager initialized");
 }
 
 %hook HIDEvent
