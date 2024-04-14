@@ -1,6 +1,6 @@
-#import "shared.h"
-#import "CBABCurve.h"
-
+#import <shared.h>
+#import <CBABCurve.h>
+//CustomCurve in CoreBrightness-Structs looks promising
 %hook CBABCurve
 -(void)setScaleFactor:(float)arg1  {
      NSLog(@"[AutoBrightnessCurve] setScaleFactor: %f", arg1);
