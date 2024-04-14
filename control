@@ -2,8 +2,8 @@ Package: com.newwares.autobrightnesscurve
 Name: AutoBrightnessCurve
 Version: 0.0.1
 Architecture: iphoneos-arm
-Description: Lets you specify a custom curve (brightness vs. ambient light) for the auto-brightness function in iPhones.
+Description: Customize your auto-brightness!
 Maintainer: newwares
 Author: newwares
 Section: Tweaks
-Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, ws.hbang.common (>= 1.17)
+Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 15.0), preferenceloader, ws.hbang.common (>= 1.17)
