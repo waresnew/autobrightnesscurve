@@ -1,6 +1,6 @@
 #import <shared.h>
 //CustomCurve in CoreBrightness-Structs looks promising
-%hook CBABCurve
+%hook CBABCurve //the hook works but CBABCurve is never used?
 -(void)setScaleFactor:(float)arg1  {
      NSLog(@"[AutoBrightnessCurve] setScaleFactor: %f", arg1);
      %orig;
@@ -63,152 +63,28 @@
 }
 %end
 
-/*
-do the same thing above for this:
-%hook BrightnessSystemClient
--(id)copyPropertyForKey:(id)arg1  { %log; id r = %orig; HBLogDebug(@" = %@", r); return r; }
--(void)registerNotificationBlock:(id)arg1  { %log; %orig; }
--(BOOL)setProperty:(id)arg1 forKey:(id)arg2  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+%hook CBAdaptationClient
++(BOOL)supportsAdaptation { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(void)setSupported:(BOOL)arg1  { %log; %orig; }
+-(BOOL)supported { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)setEnabled:(BOOL)arg1  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)setAdaptationMode:(int)arg1 withPeriod:(float)arg2  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(void)unregisterNotificationForType:(unsigned long long)arg1  { %log; %orig; }
+-(void)handleBrightnessSystemNotificationForKey:(id)arg1 withValue:(id)arg2  { %log; %orig; }
+-(BOOL)registerNotificationForType:(unsigned long long)arg1  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)available { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
 -(id)init { %log; id r = %orig; HBLogDebug(@" = %@", r); return r; }
--(void)registerNotificationBlock:(id)arg1 forProperties:(id)arg2  { %log; %orig; }
--(BOOL)isAlsSupported { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(id)initWithClientObj:(id)arg1  { %log; id r = %orig; HBLogDebug(@" = %@", r); return r; }
+-(int)getAdaptationMode { %log; int r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)setWeakestAdaptationModeFromArray:(int*)arg1 withLength:(int)arg2 andPeriod:(float)arg3  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
 -(void)dealloc { %log; %orig; }
--(void)unregisterNotificationForKey:(id)arg1  { %log; %orig; }
--(BOOL)setProperty:(id)arg1 withKey:(id)arg2 andDisplay:(unsigned long long)arg3  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(id)copyPropertyForKey:(id)arg1 andDisplay:(unsigned long long)arg2  { %log; id r = %orig; HBLogDebug(@" = %@", r); return r; }
--(void)registerDisplayNotificationCallbackBlock:(id)arg1  { %log; %orig; }
--(void)unregisterDisplayNotificationBlock { %log; %orig; }
--(void)unregisterPropertyNotificationBlock { %log; %orig; }
--(void)registerNotificationForKey:(id)arg1  { %log; %orig; }
--(void)registerNotificationForKeys:(id)arg1  { %log; %orig; }
--(void)unregisterNotificationForKeys:(id)arg1  { %log; %orig; }
--(void)registerNotificationForKeys:(id)arg1 andDisplay:(unsigned long long)arg2  { %log; %orig; }
--(void)unregisterNotificationForKeys:(id)arg1 andDisplay:(unsigned long long)arg2  { %log; %orig; }
--(void)registerNotificationForKey:(id)arg1 andDisplay:(unsigned long long)arg2  { %log; %orig; }
--(void)unregisterNotificationForKey:(id)arg1 andDisplay:(unsigned long long)arg2  { %log; %orig; }
--(BOOL)setProperty:(id)arg1 withKey:(id)arg2 keyboardID:(unsigned long long)arg3  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(id)copyPropertyForKey:(id)arg1 keyboardID:(unsigned long long)arg2  { %log; id r = %orig; HBLogDebug(@" = %@", r); return r; }
--(void)registerKeyboardNotificationCallbackBlock:(id)arg1  { %log; %orig; }
--(void)unregisterKeyboardNotificationBlock { %log; %orig; }
--(void)registerNotificationForKeys:(id)arg1 keyboardID:(unsigned long long)arg2  { %log; %orig; }
--(void)unregisterNotificationForKeys:(id)arg1 keyboardID:(unsigned long long)arg2  { %log; %orig; }
+-(BOOL)registerNotificationCallbackBlock:(id)arg1 withQueue:(id)arg2  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(void)unregisterNotificationCallbackBlock { %log; %orig; }
+-(BOOL)getEnabled { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)animateFromWeakestAdaptationModeInArray:(int*)arg1 withLength:(int)arg2 toWeakestInArray:(int*)arg3 withLength:(int)arg4 withProgress:(float)arg5 andPeriod:(float)arg6  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)getStrengths:(float*)arg1 nStrengths:(int)arg2  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)overrideStrengths:(float*)arg1 forModes:(int*)arg2 nModes:(int)arg3  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
 %end
-*/
 
-%hook BrightnessSystemClient
--(void)registerNotificationBlock:(id)arg1  {
-    NSLog(@"[BrightnessSystemClient] registerNotificationBlock: %@", arg1);
-    %orig;
-}
--(BOOL)setProperty:(id)arg1 forKey:(id)arg2  {
-    NSLog(@"[BrightnessSystemClient] setProperty: %@ forKey: %@", arg1, arg2);
-    BOOL r = %orig;
-    NSLog(@"[BrightnessSystemClient] setProperty returned %d", r);
-    return r;
-}
--(id)init {
-    NSLog(@"[BrightnessSystemClient] init");
-    id r = %orig;
-    NSLog(@"[BrightnessSystemClient] init returned %@", r);
-    return r;
-}
--(void)registerNotificationBlock:(id)arg1 forProperties:(id)arg2  {
-    NSLog(@"[BrightnessSystemClient] registerNotificationBlock: %@ forProperties: %@", arg1, arg2);
-    %orig;
-}
--(BOOL)isAlsSupported {
-    NSLog(@"[BrightnessSystemClient] isAlsSupported");
-    BOOL r = %orig;
-    NSLog(@"[BrightnessSystemClient] isAlsSupported returned %d", r);
-    return r;
-}
--(void)dealloc {
-    NSLog(@"[BrightnessSystemClient] dealloc");
-    %orig;
-}
--(void)unregisterNotificationForKey:(id)arg1  {
-    NSLog(@"[BrightnessSystemClient] unregisterNotificationForKey: %@", arg1);
-    %orig;
-}
--(BOOL)setProperty:(id)arg1 withKey:(id)arg2 andDisplay:(unsigned long long)arg3  {
-    NSLog(@"[BrightnessSystemClient] setProperty: %@ withKey: %@ andDisplay: %llu", arg1, arg2, arg3);
-    BOOL r = %orig;
-    NSLog(@"[BrightnessSystemClient] setProperty returned %d", r);
-    return r;
-}
--(id)copyPropertyForKey:(id)arg1 andDisplay:(unsigned long long)arg2  {
-    NSLog(@"[BrightnessSystemClient] copyPropertyForKey: %@ andDisplay: %llu", arg1, arg2);
-    id r = %orig;
-    NSLog(@"[BrightnessSystemClient] copyPropertyForKey returned %@", r);
-    return r;
-}
--(void)registerDisplayNotificationCallbackBlock:(id)arg1  {
-    NSLog(@"[BrightnessSystemClient] registerDisplayNotificationCallbackBlock: %@", arg1);
-    %orig;
-}
--(void)unregisterDisplayNotificationBlock {
-    NSLog(@"[BrightnessSystemClient] unregisterDisplayNotificationBlock");
-    %orig;
-}
--(void)unregisterPropertyNotificationBlock {
-    NSLog(@"[BrightnessSystemClient] unregisterPropertyNotificationBlock");
-    %orig;
-}
--(void)registerNotificationForKey:(id)arg1  {
-    NSLog(@"[BrightnessSystemClient] registerNotificationForKey: %@", arg1);
-    %orig;
-}
--(void)registerNotificationForKeys:(id)arg1  {
-    NSLog(@"[BrightnessSystemClient] registerNotificationForKeys: %@", arg1);
-    %orig;
-}
--(void)unregisterNotificationForKeys:(id)arg1  {
-    NSLog(@"[BrightnessSystemClient] unregisterNotificationForKeys: %@", arg1);
-    %orig;
-}
--(void)registerNotificationForKeys:(id)arg1 andDisplay:(unsigned long long)arg2  {
-    NSLog(@"[BrightnessSystemClient] registerNotificationForKeys: %@ andDisplay: %llu", arg1, arg2);
-    %orig;
-}
--(void)unregisterNotificationForKeys:(id)arg1 andDisplay:(unsigned long long)arg2  {
-    NSLog(@"[BrightnessSystemClient] unregisterNotificationForKeys: %@ andDisplay: %llu", arg1, arg2);
-    %orig;
-}
--(void)registerNotificationForKey:(id)arg1 andDisplay:(unsigned long long)arg2  {
-    NSLog(@"[BrightnessSystemClient] registerNotificationForKey: %@ andDisplay: %llu", arg1, arg2);
-    %orig;
-}
--(void)unregisterNotificationForKey:(id)arg1 andDisplay:(unsigned long long)arg2  {
-    NSLog(@"[BrightnessSystemClient] unregisterNotificationForKey: %@ andDisplay: %llu", arg1, arg2);
-    %orig;
-}
--(BOOL)setProperty:(id)arg1 withKey:(id)arg2 keyboardID:(unsigned long long)arg3  {
-    NSLog(@"[BrightnessSystemClient] setProperty: %@ withKey: %@ keyboardID: %llu", arg1, arg2, arg3);
-    BOOL r = %orig;
-    NSLog(@"[BrightnessSystemClient] setProperty returned %d", r);
-    return r;
-}
--(id)copyPropertyForKey:(id)arg1 keyboardID:(unsigned long long)arg2  {
-    NSLog(@"[BrightnessSystemClient] copyPropertyForKey: %@ keyboardID: %llu", arg1, arg2);
-    id r = %orig;
-    NSLog(@"[BrightnessSystemClient] copyPropertyForKey returned %@", r);
-    return r;
-}
--(void)registerKeyboardNotificationCallbackBlock:(id)arg1  {
-    NSLog(@"[BrightnessSystemClient] registerKeyboardNotificationCallbackBlock: %@", arg1);
-    %orig;
-}
--(void)unregisterKeyboardNotificationBlock {
-    NSLog(@"[BrightnessSystemClient] unregisterKeyboardNotificationBlock");
-    %orig;
-}
--(void)registerNotificationForKeys:(id)arg1 keyboardID:(unsigned long long)arg2  {
-    NSLog(@"[BrightnessSystemClient] registerNotificationForKeys: %@ keyboardID: %llu", arg1, arg2);
-    %orig;
-}
--(void)unregisterNotificationForKeys:(id)arg1 keyboardID:(unsigned long long)arg2  {
-    NSLog(@"[BrightnessSystemClient] unregisterNotificationForKeys: %@ keyboardID: %llu", arg1, arg2);
-    %orig;
-}
 
-%end
+
