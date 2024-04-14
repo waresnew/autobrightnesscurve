@@ -9,8 +9,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@main
-
+      - name: Cache Theos
+        uses: actions/cache@main
+        with:
+          path: theos
+          key: theos
       - name: Checkout theos/theos
+        if: steps.cache-theos.outputs.cache-hit != 'true'
         uses: actions/checkout@main
         with:
           repository: theos/theos
@@ -19,12 +24,15 @@ jobs:
           path: theos
 
       - name: Checkout theos/sdks
+        if: steps.cache-theos.outputs.cache-hit != 'true'
         uses: actions/checkout@main
         with:
           repository: theos/sdks
           sparse-checkout: iPhoneOS16.5.sdk
           path: theos/sdks
-
+      - name: Install Build Dependencies
+        run: |
+          brew install make xz ldid
       - name: Build Package
         run: |
           brew install make xz ldid

@@ -1,8 +1,8 @@
 #import <Foundation/NSObject.h>
+
 @interface BrightnessManager: NSObject
-@property (readonly,nonatomic) float iosVersion;
--(void)setBrightness:(float)amount;
--(float)brightness;
--(void)initWithIosVersion:(int)iosVersion;
-+ (BrightnessManager*) shared;
+    -(void)setBrightness:(float)amount;
+    -(float)brightness;
+    -(id)init;
+    + (BrightnessManager*) shared;
 @end

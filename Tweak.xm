@@ -5,8 +5,7 @@
 
 static void didFinishLaunching(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef info) {
     NSLog(@"[BrightnessCurve] didFinishLaunching");
-    int iosVersion = [[[%c(UIDevice) currentDevice] systemVersion] intValue];
-    [[BrightnessManager shared] initWithIosVersion: iosVersion];
+    [BrightnessManager shared];
     NSLog(@"[BrightnessCurve] BrightnessManager initialized");
 }
 
@@ -38,5 +37,7 @@ static void didFinishLaunching(CFNotificationCenterRef center, void *observer, C
 /*plan: use public framework https://developer.apple.com/documentation/sensorkit/srsensor/3377673-ambientlightsensor
 then just implement my own version of autobrightness by calling setBrightnessLevel() based on the ambient light sensor
 */
+
+//or use CoreBrightness private framework's CBABCurve/CBABCurveConfiguration
 
 
