@@ -8,7 +8,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>BrightnessCurvePrefs First Page</string>
+			<string>AutoBrightnessCurvePrefs First Page</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -16,7 +16,7 @@
 			<key>default</key>
 			<true/>
 			<key>defaults</key>
-			<string>com.newwares.brightnesscurveprefs</string>
+			<string>com.newwares.autobrightnesscurveprefs</string>
 			<key>key</key>
 			<string>AwesomeSwitch1</string>
 			<key>label</key>
@@ -24,6 +24,6 @@
 		</dict>
 	</array>
 	<key>title</key>
-	<string>BrightnessCurvePrefs</string>
+	<string>AutoBrightnessCurvePrefs</string>
 </dict>
 </plist>

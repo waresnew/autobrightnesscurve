@@ -5,17 +5,17 @@
 	<key>entry</key>
 	<dict>
 		<key>bundle</key>
-		<string>BrightnessCurvePrefs</string>
+		<string>AutoBrightnessCurvePrefs</string>
 		<key>cell</key>
 		<string>PSLinkCell</string>
 		<key>detail</key>
-		<string>BSCRootListController</string>
+		<string>ABCRootListController</string>
 		<key>icon</key>
 		<string>icon.png</string>
 		<key>isController</key>
 		<true/>
 		<key>label</key>
-		<string>BrightnessCurvePrefs</string>
+		<string>AutoBrightnessCurvePrefs</string>
 	</dict>
 </dict>
 </plist>
