@@ -64,26 +64,26 @@
 %end
 
 %hook CBAdaptationClient
-+(BOOL)supportsAdaptation { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
++(BOOL)supportsAdaptation { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
 -(void)setSupported:(BOOL)arg1  { %log; %orig; }
--(BOOL)supported { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(BOOL)setEnabled:(BOOL)arg1  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(BOOL)setAdaptationMode:(int)arg1 withPeriod:(float)arg2  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)supported { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(BOOL)setEnabled:(BOOL)arg1  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(BOOL)setAdaptationMode:(int)arg1 withPeriod:(float)arg2  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
 -(void)unregisterNotificationForType:(unsigned long long)arg1  { %log; %orig; }
 -(void)handleBrightnessSystemNotificationForKey:(id)arg1 withValue:(id)arg2  { %log; %orig; }
--(BOOL)registerNotificationForType:(unsigned long long)arg1  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(BOOL)available { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(id)init { %log; id r = %orig; HBLogDebug(@" = %@", r); return r; }
--(id)initWithClientObj:(id)arg1  { %log; id r = %orig; HBLogDebug(@" = %@", r); return r; }
--(int)getAdaptationMode { %log; int r = %orig; HBLogDebug(@" = %d", r); return r; }
--(BOOL)setWeakestAdaptationModeFromArray:(int*)arg1 withLength:(int)arg2 andPeriod:(float)arg3  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)registerNotificationForType:(unsigned long long)arg1  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(BOOL)available { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(id)init { %log; id r = %orig; NSLog(@" = %@", r); return r; }
+-(id)initWithClientObj:(id)arg1  { %log; id r = %orig; NSLog(@" = %@", r); return r; }
+-(int)getAdaptationMode { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(BOOL)setWeakestAdaptationModeFromArray:(int*)arg1 withLength:(int)arg2 andPeriod:(float)arg3  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
 -(void)dealloc { %log; %orig; }
--(BOOL)registerNotificationCallbackBlock:(id)arg1 withQueue:(id)arg2  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)registerNotificationCallbackBlock:(id)arg1 withQueue:(id)arg2  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
 -(void)unregisterNotificationCallbackBlock { %log; %orig; }
--(BOOL)getEnabled { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(BOOL)animateFromWeakestAdaptationModeInArray:(int*)arg1 withLength:(int)arg2 toWeakestInArray:(int*)arg3 withLength:(int)arg4 withProgress:(float)arg5 andPeriod:(float)arg6  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(BOOL)getStrengths:(float*)arg1 nStrengths:(int)arg2  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
--(BOOL)overrideStrengths:(float*)arg1 forModes:(int*)arg2 nModes:(int)arg3  { %log; BOOL r = %orig; HBLogDebug(@" = %d", r); return r; }
+-(BOOL)getEnabled { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(BOOL)animateFromWeakestAdaptationModeInArray:(int*)arg1 withLength:(int)arg2 toWeakestInArray:(int*)arg3 withLength:(int)arg4 withProgress:(float)arg5 andPeriod:(float)arg6  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(BOOL)getStrengths:(float*)arg1 nStrengths:(int)arg2  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(BOOL)overrideStrengths:(float*)arg1 forModes:(int*)arg2 nModes:(int)arg3  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
 %end
 
 
