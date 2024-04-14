@@ -7,6 +7,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = BrightnessCurve
 BrightnessCurve_FRAMEWORKS = UIKit
+BrightnessCurve_PRIVATE_FRAMEWORKS = CoreBrightness
 BrightnessCurve_EXTRA_FRAMEWORKS += Cephei
 
 BrightnessCurve_FILES = $(wildcard *.x *.xm)
