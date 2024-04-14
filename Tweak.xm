@@ -23,3 +23,21 @@
 -(id)copyUserPrefState { %log; id r = %orig; NSLog(@" = %@", r); return r; }
 -(void)setSavedPrefences:(id)arg1  { %log; %orig; }
 %end
+
+%hook SBDisplayBrightnessController
+-(float)brightnessLevel {
+    %log; return %orig;
+}
+-(BOOL)setBrightnessLevel:(float)arg1 animated:(BOOL)arg2 {
+    %log; return %orig;
+}
+-(void)_setBrightnessLevel:(float)arg1 animated:(BOOL)arg2 {
+    %log; %orig;
+}
+-(void)_beginBrightnessTransaction {
+    %log; %orig;
+}
+-(void)_completeBrightnessTransaction {
+    %log; %orig;
+}
+%end
