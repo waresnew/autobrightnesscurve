@@ -1,35 +1,121 @@
 #import <shared.h>
-#import <UIKit/UIKit.h>
 
-//Can use CBABCurve maybe in iOS 15?
-//SBBacklightPlatformProvider is only in iOS 16 and 17
-%hook SBBacklightPlatformProvider
-+(BOOL)deviceSupportsAlwaysOn { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
--(void)removeObserver:(id)arg1  { %log; %orig; }
--(void)completeInitializationAfterBLSStartup { %log; %orig; }
--(void)_updateAlwaysOnEnabled { %log; %orig; }
--(void)setWindowScene:(UIWindowScene *)arg1  { %log; %orig; }
--(BOOL)suppressionSupported { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
--(BOOL)isUsingAlwaysOnBrightnessCurve { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
--(void)_notifyObserversOfSignificantUserInteraction { %log; %orig; }
--(void)addObserver:(id)arg1  { %log; %orig; }
--(BOOL)isAlwaysOnEnabled { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
--(UIWindowScene *)windowScene { %log; UIWindowScene * r = %orig; NSLog(@" = %@", r); return r; }
--(id)init { %log; id r = %orig; NSLog(@" = %@", r); return r; }
--(void)logTelemetryForRenderSession:(id)arg1  { %log; %orig; }
--(double)backlightFadeInDuration { %log; double r = %orig; NSLog(@" = %f", r); return r; }
--(id)flipbookTelemetryDelegate { %log; id r = %orig; NSLog(@" = %@", r); return r; }
--(id)initWithBacklightEnvironmentSessionProvider:(id)arg1  { %log; id r = %orig; NSLog(@" = %@", r); return r; }
--(void)significantUserInteractionMonitorDetectedSignificantUserInteraction:(id)arg1  { %log; %orig; }
--(void)_setBlankingWindowVisible:(BOOL)arg1 fadeDuration:(double)arg2  { %log; %orig; }
--(float)backlightDimmedFactor { %log; float r = %orig; NSLog(@" = %f", r); return r; }
--(void)useAlwaysOnBrightnessCurve:(BOOL)arg1 withRampDuration:(double)arg2  { %log; %orig; }
--(BOOL)isShowingBlankingWindow { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
--(void)logTelemetryForInvalidation:(id)arg1  { %log; %orig; }
--(double)backlightFadeOutDuration { %log; double r = %orig; NSLog(@" = %f", r); return r; }
--(void)logTelemetryForRequestDates:(id)arg1  { %log; %orig; }
--(id)sessionProvider { %log; id r = %orig; NSLog(@" = %@", r); return r; }
--(void)showBlankingWindow:(BOOL)arg1 withFadeDuration:(double)arg2  { %log; %orig; }
--(double)backlightDimmingDuration { %log; double r = %orig; NSLog(@" = %f", r); return r; }
--(void)criticalAssertDidFail:(id)arg1 resetFailure:(id)arg2  { %log; %orig; }
+//i wish i could use CBABCurve
+%hook AWDPowerDisplayBacklightMetrics
+-(void)setBacklightBuckets:(NSMutableArray *)arg1  { %log; %orig; }
+-(void)addBacklightBucket:(id)arg1  { %log; %orig; }
+-(unsigned long long)backlightBucketsCount { %log; unsigned long long r = %orig; NSLog(@" = %llu", r); return r; }
+-(void)clearBacklightBuckets { %log; %orig; }
+-(id)backlightBucketAtIndex:(unsigned long long)arg1  { %log; id r = %orig; NSLog(@" = %@", r); return r; }
+-(void)setDispOnCount:(unsigned)arg1  { %log; %orig; }
+-(void)setHasDispOnCount:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasDispOnCount { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setUnpluggedDisplayOnDuration:(unsigned)arg1  { %log; %orig; }
+-(void)setHasUnpluggedDisplayOnDuration:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasUnpluggedDisplayOnDuration { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setPluggedDisplayOnDuration:(unsigned)arg1  { %log; %orig; }
+-(void)setHasPluggedDisplayOnDuration:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasPluggedDisplayOnDuration { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setMieDuration:(unsigned)arg1  { %log; %orig; }
+-(void)setHasMieDuration:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasMieDuration { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setMieCount:(unsigned)arg1  { %log; %orig; }
+-(void)setHasMieCount:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasMieCount { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setDisplayIdlePercentage:(unsigned)arg1  { %log; %orig; }
+-(void)setHasDisplayIdlePercentage:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasDisplayIdlePercentage { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveE1:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveE1:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveE1 { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveL1:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveL1:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveL1 { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveE2:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveE2:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveE2 { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveL2:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveL2:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveL2 { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveE0A:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveE0A:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveE0A { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveL0A:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveL0A:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveL0A { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveE0B:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveE0B:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveE0B { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveL0B:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveL0B:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveL0B { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessCurveEdynth:(int)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessCurveEdynth:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessCurveEdynth { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessSlider:(unsigned)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessSlider:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessSlider { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessLux:(unsigned)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessLux:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessLux { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsAutoBrightnessChangeCount:(unsigned)arg1  { %log; %orig; }
+-(void)setHasAlsAutoBrightnessChangeCount:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsAutoBrightnessChangeCount { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setAlsBrightnessEnableCnt:(unsigned)arg1  { %log; %orig; }
+-(void)setHasAlsBrightnessEnableCnt:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasAlsBrightnessEnableCnt { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setTotalDisplayPower:(unsigned)arg1  { %log; %orig; }
+-(void)setHasTotalDisplayPower:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasTotalDisplayPower { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setTotalBacklightPower:(unsigned)arg1  { %log; %orig; }
+-(void)setHasTotalBacklightPower:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasTotalBacklightPower { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setFrameRateResidencyPercentage:(unsigned)arg1  { %log; %orig; }
+-(void)setHasFrameRateResidencyPercentage:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasFrameRateResidencyPercentage { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setResidencyPercentage60Hz:(unsigned)arg1  { %log; %orig; }
+-(void)setHasResidencyPercentage60Hz:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasResidencyPercentage60Hz { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)setResidencyPercentage30Hz:(unsigned)arg1  { %log; %orig; }
+-(void)setHasResidencyPercentage30Hz:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasResidencyPercentage30Hz { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(unsigned)dispOnCount { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)unpluggedDisplayOnDuration { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)pluggedDisplayOnDuration { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)mieDuration { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)mieCount { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)displayIdlePercentage { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(int)alsAutoBrightnessCurveE1 { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(int)alsAutoBrightnessCurveL1 { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(int)alsAutoBrightnessCurveE2 { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(int)alsAutoBrightnessCurveL2 { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(int)alsAutoBrightnessCurveE0A { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(int)alsAutoBrightnessCurveL0A { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(int)alsAutoBrightnessCurveE0B { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(int)alsAutoBrightnessCurveL0B { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(int)alsAutoBrightnessCurveEdynth { %log; int r = %orig; NSLog(@" = %d", r); return r; }
+-(unsigned)alsAutoBrightnessSlider { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)alsAutoBrightnessLux { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)alsAutoBrightnessChangeCount { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)alsBrightnessEnableCnt { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(NSMutableArray *)backlightBuckets { %log; NSMutableArray * r = %orig; NSLog(@" = %@", r); return r; }
+-(unsigned)totalDisplayPower { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)totalBacklightPower { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)frameRateResidencyPercentage { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)residencyPercentage60Hz { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(unsigned)residencyPercentage30Hz { %log; unsigned r = %orig; NSLog(@" = %u", r); return r; }
+-(BOOL)readFrom:(id)arg1  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)writeTo:(id)arg1  { %log; %orig; }
+-(void)mergeFrom:(id)arg1  { %log; %orig; }
+-(void)setHasTimestamp:(BOOL)arg1  { %log; %orig; }
+-(BOOL)hasTimestamp { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(void)dealloc { %log; %orig; }
+-(BOOL)isEqual:(id)arg1  { %log; BOOL r = %orig; NSLog(@" = %d", r); return r; }
+-(unsigned long long)hash { %log; unsigned long long r = %orig; NSLog(@" = %llu", r); return r; }
+-(id)description { %log; id r = %orig; NSLog(@" = %@", r); return r; }
+-(id)copyWithZone:(NSZone*)arg1  { %log; id r = %orig; NSLog(@" = %@", r); return r; }
+-(unsigned long long)timestamp { %log; unsigned long long r = %orig; NSLog(@" = %llu", r); return r; }
+-(id)dictionaryRepresentation { %log; id r = %orig; NSLog(@" = %@", r); return r; }
+-(void)setTimestamp:(unsigned long long)arg1  { %log; %orig; }
+-(void)copyTo:(id)arg1  { %log; %orig; }
 %end
