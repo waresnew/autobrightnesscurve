@@ -35,7 +35,6 @@ jobs:
           brew install make xz ldid
       - name: Build Package
         run: |
-          brew install make xz ldid
           export THEOS=theos
           gmake clean package FINALPACKAGE=1
 
