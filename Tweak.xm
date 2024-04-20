@@ -3,9 +3,16 @@
 extern "C" id BKSDisplayBrightnessCurveGetCurrent();
 extern "C" void IOHIDEventCreateBrightnessEvent();
 extern "C" void IOHIDEventCreateAmbientLightSensorEvent();
+extern "C" id _BKSHIDGetCurrentDisplayBrightnessCurve(uint param_1, id param_2);
 %hookf(id, BKSDisplayBrightnessCurveGetCurrent, void) {
     id ret = %orig;
     NSLog(@"BKSDisplayBrightnessCurveGetCurrent: %@", ret);
+    return ret;
+}
+
+%hookf(id, _BKSHIDGetCurrentDisplayBrightnessCurve, uint param_1, id param_2) {
+    id ret = %orig;
+    NSLog(@"_BKSHIDGetCurrentDisplayBrightnessCurve: %d, %@: Returning %@", param_1, param_2, ret);
     return ret;
 }
 
