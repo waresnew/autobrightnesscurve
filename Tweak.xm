@@ -40,23 +40,21 @@ extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDuration(int, int,
     %orig;
 }
 
-//the below are testing (rn some of these are cuasing crashes prob bc of wrong type)
-
-
 %hookf(void, BKSHIDServicesAmbientLightSensorEnableAutoBrightness, int64_t param1) {
     NSLog(@"[BKSHIDServicesAmbientLightSensorEnableAutoBrightness] %lld", param1);
     %orig;
 }
+
+//the below are testing (rn some of these are cuasing crashes prob bc of wrong type)
+
+
+
 
 // %hookf(mach_msg_return_t, _BKSHIDGetBacklightFactor, mach_port_t param1, id param2) {
 //     NSLog(@"[_BKSHIDGetBacklightFactor] %u %@", param1, param2);
 //     return %orig;
 // }
 
-%hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDuration, int param1, int param2, mach_port_t param3, int param4, int param5) {
-    NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDuration] %d %d %u %d %d", param1, param2, param3, param4, param5);
-    return %orig;
-}
 
 // %hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDurationAsync, int param1, int param2, mach_port_t param3, int param4, int param5) {
 //     NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDurationAsync] %d %d %u %d %d", param1, param2, param3, param4, param5);
