@@ -12,10 +12,10 @@ extern "C" mach_msg_return_t _BKSHIDGetCurrentDisplayBrightnessCurve(mach_port_t
 extern "C" HIDEvent* IOHIDEventCreateAmbientLightSensorEvent(CFAllocatorRef, uint64_t, int, uint);
 extern "C" int BKSHIDServicesAmbientLightSensorExists();
 extern "C" mach_msg_return_t _BKSHIDAmbientLightSensorDisableAutoBrightness(uint);
-// extern "C" void BKSHIDServicesAmbientLightSensorEnableAutoBrightness(int64_t);
-// extern "C" mach_msg_return_t _BKSHIDGetBacklightFactor(mach_port_t, id);
-// extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDuration(int, int, mach_port_t, int, int);
-// extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDurationAsync(int, int, mach_port_t, int, int);
+extern "C" void BKSHIDServicesAmbientLightSensorEnableAutoBrightness(int64_t);
+extern "C" mach_msg_return_t _BKSHIDGetBacklightFactor(mach_port_t, id);
+extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDuration(int, int, mach_port_t, int, int);
+extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDurationAsync(int, int, mach_port_t, int, int);
 
 
 //these have been printed
@@ -40,40 +40,25 @@ extern "C" mach_msg_return_t _BKSHIDAmbientLightSensorDisableAutoBrightness(uint
     %orig;
 }
 
-//the below are testing
+//the below are testing (rn some of these are cuasing crashes prob bc of wrong type)
 
-%hookf(HIDEvent*, IOHIDEventCreateAmbientLightSensorEvent, CFAllocatorRef param1, uint64_t param2, int param3, uint param4) {
-    NSLog(@"[IOHIDEventCreateAmbientLightSensorEvent] %@ %llu %d %u", param1, param2, param3, param4);
+
+%hookf(void, BKSHIDServicesAmbientLightSensorEnableAutoBrightness, int64_t param1) {
+    NSLog(@"[BKSHIDServicesAmbientLightSensorEnableAutoBrightness]");
+    %orig;
+}
+
+%hookf(mach_msg_return_t, _BKSHIDGetBacklightFactor, mach_port_t param1, id param2) {
+    NSLog(@"[_BKSHIDGetBacklightFactor]");
     return %orig;
 }
 
-%hookf(int, BKSHIDServicesAmbientLightSensorExists, void) {
-    int ret = %orig;
-    NSLog(@"[BKSHIDServicesAmbientLightSensorExists] %d", ret);
-    return ret;
-}
-
-%hookf(mach_msg_return_t, _BKSHIDAmbientLightSensorDisableAutoBrightness, uint param1) {
-    NSLog(@"[_BKSHIDAmbientLightSensorDisableAutoBrightness] %u", param1);
+%hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDuration, int param1, int param2, mach_port_t param3, int param4, int param5) {
+    NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDuration]");
     return %orig;
 }
 
-// %hookf(void, BKSHIDServicesAmbientLightSensorEnableAutoBrightness, int64_t param1) {
-//     NSLog(@"[BKSHIDServicesAmbientLightSensorEnableAutoBrightness] %lld", param1);
-//     %orig;
-// }
-
-// %hookf(mach_msg_return_t, _BKSHIDGetBacklightFactor, mach_port_t param1, id param2) {
-//     NSLog(@"[_BKSHIDGetBacklightFactor] %u %@", param1, param2);
-//     return %orig;
-// }
-
-// %hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDuration, int param1, int param2, mach_port_t param3, int param4, int param5) {
-//     NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDuration] %d %d %u %d %d", param1, param2, param3, param4, param5);
-//     return %orig;
-// }
-
-// %hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDurationAsync, int param1, int param2, mach_port_t param3, int param4, int param5) {
-//     NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDurationAsync] %d %d %u %d %d", param1, param2, param3, param4, param5);
-//     return %orig;
-// }
+%hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDurationAsync, int param1, int param2, mach_port_t param3, int param4, int param5) {
+    NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDurationAsync]");
+    return %orig;
+}
