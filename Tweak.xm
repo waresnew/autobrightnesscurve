@@ -13,9 +13,9 @@ extern "C" HIDEvent* IOHIDEventCreateAmbientLightSensorEvent(CFAllocatorRef, uin
 extern "C" int BKSHIDServicesAmbientLightSensorExists();
 extern "C" mach_msg_return_t _BKSHIDAmbientLightSensorDisableAutoBrightness(uint);
 extern "C" void BKSHIDServicesAmbientLightSensorEnableAutoBrightness(int64_t);
-extern "C" mach_msg_return_t _BKSHIDGetBacklightFactor(mach_port_t, id);
+//extern "C" mach_msg_return_t _BKSHIDGetBacklightFactor(mach_port_t, id);
 extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDuration(int, int, mach_port_t, int, int);
-extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDurationAsync(int, int, mach_port_t, int, int);
+//extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDurationAsync(int, int, mach_port_t, int, int);
 
 
 //these have been printed
@@ -44,21 +44,21 @@ extern "C" mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDurationAsync(int,
 
 
 %hookf(void, BKSHIDServicesAmbientLightSensorEnableAutoBrightness, int64_t param1) {
-    NSLog(@"[BKSHIDServicesAmbientLightSensorEnableAutoBrightness]");
+    NSLog(@"[BKSHIDServicesAmbientLightSensorEnableAutoBrightness] %lld", param1);
     %orig;
 }
 
-%hookf(mach_msg_return_t, _BKSHIDGetBacklightFactor, mach_port_t param1, id param2) {
-    NSLog(@"[_BKSHIDGetBacklightFactor]");
-    return %orig;
-}
+// %hookf(mach_msg_return_t, _BKSHIDGetBacklightFactor, mach_port_t param1, id param2) {
+//     NSLog(@"[_BKSHIDGetBacklightFactor] %u %@", param1, param2);
+//     return %orig;
+// }
 
 %hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDuration, int param1, int param2, mach_port_t param3, int param4, int param5) {
-    NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDuration]");
+    NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDuration] %d %d %u %d %d", param1, param2, param3, param4, param5);
     return %orig;
 }
 
-%hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDurationAsync, int param1, int param2, mach_port_t param3, int param4, int param5) {
-    NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDurationAsync]");
-    return %orig;
-}
+// %hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDurationAsync, int param1, int param2, mach_port_t param3, int param4, int param5) {
+//     NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDurationAsync] %d %d %u %d %d", param1, param2, param3, param4, param5);
+//     return %orig;
+// }
