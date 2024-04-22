@@ -6,8 +6,9 @@ extern "C" BKSDisplayBrightnessTransactionRef BKSDisplayBrightnessTransactionCre
 extern "C" void BKSDisplayBrightnessSet(float, NSInteger);
 extern "C" float BKSDisplayBrightnessGetCurrent();
 extern "C" void BKSDisplayBrightnessSetAutoBrightnessEnabled(BOOL);
+extern "C" mach_msg_return_t _BKSHIDGetCurrentDisplayBrightnessCurve(mach_port_t, id);
 
-
+//these have been printed
 %hookf(BKSDisplayBrightnessTransactionRef, BKSDisplayBrightnessTransactionCreate, CFAllocatorRef param1) {
     NSLog(@"[BKSDisplayBrightnessTransactionCreate] %@", param1);
     return %orig;
@@ -27,4 +28,10 @@ extern "C" void BKSDisplayBrightnessSetAutoBrightnessEnabled(BOOL);
 %hookf(void, BKSDisplayBrightnessSetAutoBrightnessEnabled, BOOL arg1) {
     NSLog(@"[BKSDisplayBrightnessSetAutoBrightnessEnabled] %d", arg1);
     %orig;
+}
+//these need to be tested
+%hookf(mach_msg_return_t, _BKSHIDGetCurrentDisplayBrightnessCurve, mach_port_t param1,id param_2) {
+    mach_msg_return_t ret = %orig;
+    NSLog(@"[_BKSHIDGetCurrentDisplayBrightnessCurve] %d", ret);
+    return ret;
 }
