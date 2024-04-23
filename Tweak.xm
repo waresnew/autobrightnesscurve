@@ -8,6 +8,8 @@ extern "C" {
     float EDRGetDisplayBacklightBrightness(int param1);
     float EDRServerGetDisplayBrightnessForDisplay(int64_t param1);
     void EDRServerSetDisplayBrightnessForDisplay(float param1, float param2, float param3, float param4, int64_t param5);
+    void BKSHIDServicesAmbientLightSensorEnableAutoBrightness(int64_t);
+    mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDuration(int, int, mach_port_t, int, int);
 }
 
 %hookf(float, EDRGetAmbientIlluminance, int32_t param1) {
@@ -43,4 +45,14 @@ extern "C" {
 %hookf(void, EDRServerSetDisplayBrightnessForDisplay, float param1, float param2, float param3, float param4, int64_t param5) {
     %orig;
     NSLog(@"EDRServerSetDisplayBrightnessForDisplay: %f, %f, %f, %f, %lld", param1, param2, param3, param4, param5);
+}
+
+%hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDuration, int param1, int param2, mach_port_t param3, int param4, int param5) {
+    NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDuration] %d %d %u %d %d", param1, param2, param3, param4, param5);
+    return %orig;
+}
+
+%hookf(void, BKSHIDServicesAmbientLightSensorEnableAutoBrightness, int64_t param1) {
+    NSLog(@"[BKSHIDServicesAmbientLightSensorEnableAutoBrightness] %lld", param1);
+    %orig;
 }
