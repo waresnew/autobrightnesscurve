@@ -6,8 +6,8 @@ THEOS_PACKAGE_SCHEME=rootless
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = AutoBrightnessCurve
-AutoBrightnessCurve_FRAMEWORKS = UIKit IOKit
-AutoBrightnessCurve_PRIVATE_FRAMEWORKS = BackBoardServices
+AutoBrightnessCurve_FRAMEWORKS = UIKit
+AutoBrightnessCurve_PRIVATE_FRAMEWORKS = libEDR
 AutoBrightnessCurve_EXTRA_FRAMEWORKS += Cephei
 
 AutoBrightnessCurve_FILES = $(wildcard *.x *.xm)
