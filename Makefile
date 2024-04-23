@@ -1,5 +1,5 @@
 TARGET := iphone:clang:latest:15.0
-INSTALL_TARGET_PROCESSES = SpringBoard
+INSTALL_TARGET_PROCESSES = SpringBoard backboardd
 ARCHS = arm64e
 THEOS_PACKAGE_SCHEME=rootless
 
