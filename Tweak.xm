@@ -1,5 +1,4 @@
 #import <shared.h>
-//i wish i could use CBABCurve
 
 extern "C" {
     float EDRGetAmbientIlluminance(int32_t param1);
@@ -8,8 +7,16 @@ extern "C" {
     float EDRGetDisplayBacklightBrightness(int param1);
     float EDRServerGetDisplayBrightnessForDisplay(int64_t param1);
     void EDRServerSetDisplayBrightnessForDisplay(float param1, float param2, float param3, float param4, int64_t param5);
-    void BKSHIDServicesAmbientLightSensorEnableAutoBrightness(int64_t);
-    mach_msg_return_t _BKSHIDSetBacklightFactorWithFadeDuration(int, int, mach_port_t, int, int);
+    void EDRServerStartService();
+    void EDRServerEnableForDisplay(int64_t, int64_t);
+    void EDRServerAddMainDisplay(int64_t);
+    void EDRServerAddDisplay(int64_t);
+    void EDREnable(int, int);
+    void EDRCreateClientForDisplay(int64_t);
+}
+
+%ctor {
+    NSLog(@"[EDR] Loaded");
 }
 
 %hookf(float, EDRGetAmbientIlluminance, int32_t param1) {
@@ -47,12 +54,32 @@ extern "C" {
     NSLog(@"EDRServerSetDisplayBrightnessForDisplay: %f, %f, %f, %f, %lld", param1, param2, param3, param4, param5);
 }
 
-%hookf(mach_msg_return_t, _BKSHIDSetBacklightFactorWithFadeDuration, int param1, int param2, mach_port_t param3, int param4, int param5) {
-    NSLog(@"[_BKSHIDSetBacklightFactorWithFadeDuration] %d %d %u %d %d", param1, param2, param3, param4, param5);
-    return %orig;
+%hookf(void, EDRServerStartService) {
+    %orig;
+    NSLog(@"EDRServerStartService");
 }
 
-%hookf(void, BKSHIDServicesAmbientLightSensorEnableAutoBrightness, int64_t param1) {
-    NSLog(@"[BKSHIDServicesAmbientLightSensorEnableAutoBrightness] %lld", param1);
+%hookf(void, EDRServerEnableForDisplay, int64_t param1, int64_t param2) {
     %orig;
+    NSLog(@"EDRServerEnableForDisplay: %lld, %lld", param1, param2);
+}
+
+%hookf(void, EDRServerAddMainDisplay, int64_t param1) {
+    %orig;
+    NSLog(@"EDRServerAddMainDisplay: %lld", param1);
+}
+
+%hookf(void, EDRServerAddDisplay, int64_t param1) {
+    %orig;
+    NSLog(@"EDRServerAddDisplay: %lld", param1);
+}
+
+%hookf(void, EDREnable, int param1, int param2) {
+    %orig;
+    NSLog(@"EDREnable: %d, %d", param1, param2);
+}
+
+%hookf(void, EDRCreateClientForDisplay, int64_t param1) {
+    %orig;
+    NSLog(@"EDRCreateClientForDisplay: %lld", param1);
 }
